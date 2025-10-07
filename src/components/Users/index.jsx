@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../../service/constant";
 
 const Users = () => {
     const [users, setUsers] = useState([])
@@ -6,7 +7,7 @@ const Users = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/users')
+                const response = await fetch(`${API_URL}/users`)
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`)
             }
