@@ -1,12 +1,13 @@
 import { useState } from "react";
 import React from "react";
 import { API_URL } from "../../service/constant";
+import './register.css'
 
 
 const RegisterForm = () => {    
     const [email, setEmail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [first_name, setFirst_name] = useState("");
+    const [last_name, setLast_name] = useState("");
     const [mobile, setMobile] = useState();
     const [password, setPassword] = useState("");
 
@@ -17,13 +18,12 @@ const RegisterForm = () => {
 
         const payload = {
             email, 
-            firstName, 
-            lastName, 
+            first_name, 
+            last_name, 
             mobile: Number(mobile), 
             password
         }
 
-        console.log(url)
         try {
             const res = await fetch(url, {
                 method: "POST", 
@@ -39,7 +39,7 @@ const RegisterForm = () => {
             }
 
             const data = await res.json().catch(() => ({}));
-            console.log("Singup email: ", email, "password: ", password, data.message);
+            console.log("Signup email: ", email, "password: ", password, data.message);
 
         } catch (err) {
             console.log(err)
@@ -47,53 +47,23 @@ const RegisterForm = () => {
     }
 
     return (
-        <>
+        <div className="register-hero">
+          <div className="register-card">
             <h2>Register your profile</h2>
-            <form onSubmit={handleSignup}>
-                <input 
-                    type="email"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-
-                <input 
-                    type="firstName"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                />
-
-                <input 
-                    type="lastName"
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
-
-                <input 
-                    type="mobile"
-                    placeholder="Mobile number"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    required
-                />
-
-                <input 
-                    type="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-
-                <button type="submit">Submit</button>
+            <form className="register-form" onSubmit={handleSignup}>
+              <input type="email" placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
+              <input type="text" placeholder="First name" value={first_name} onChange={(e)=>setFirst_name(e.target.value)} required />
+              <input type="text" placeholder="Last name" value={last_name} onChange={(e)=>setLast_name(e.target.value)} required />
+              <input type="tel" placeholder="Mobile number" value={mobile} onChange={(e)=>setMobile(e.target.value)} required />
+              <div className="input-with-icon">
+                <input type="password" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)} required />
+              </div>
+              <button type="submit">Submit</button>
             </form>
-        </>
-    )
+            <div className="register-info">We will not share your information.</div>
+          </div>
+        </div>
+      );
 }
 
 export default RegisterForm;
