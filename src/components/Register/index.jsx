@@ -2,14 +2,16 @@ import { useState } from "react";
 import React from "react";
 import { API_URL } from "../../service/constant";
 import './register.css'
+import { useNavigate } from "react-router-dom";
 
 
-const RegisterForm = () => {    
+const RegisterForm = ({ setUser }) => {    
     const [email, setEmail] = useState("");
     const [first_name, setFirst_name] = useState("");
     const [last_name, setLast_name] = useState("");
     const [mobile, setMobile] = useState();
     const [password, setPassword] = useState("");
+    const navigate = useNavigate()
 
     const url = `${API_URL}/register`;
 
@@ -20,7 +22,7 @@ const RegisterForm = () => {
             email, 
             first_name, 
             last_name, 
-            mobile: Number(mobile), 
+            mobile, 
             password
         }
 
@@ -38,8 +40,9 @@ const RegisterForm = () => {
                 throw new Error(body.error || `Request failed: ${res.status}`)
             }
 
-            const data = await res.json().catch(() => ({}));
-            console.log("Signup email: ", email, "password: ", password, data.message);
+            const data = await res.json().catch(() => ({}));   
+            setUser(data)
+            navigate('/profile')
 
         } catch (err) {
             console.log(err)
@@ -58,7 +61,8 @@ const RegisterForm = () => {
               <div className="input-with-icon">
                 <input type="password" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)} required />
               </div>
-              <button type="submit">Submit</button>
+              <button type="submit" onClick={() => navigate(`/profile`)}>Submit</button>
+              <button type="submit" onClick={() => navigate(`/login`)}>Login</button>
             </form>
             <div className="register-info">We will not share your information.</div>
           </div>

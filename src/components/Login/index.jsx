@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import './login.css'
 import { API_URL } from '../../service/constant';
+import Profile from '../Profile';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({setUser }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const url = `${API_URL}/login`;
 
@@ -29,15 +32,17 @@ const Login = () => {
                 const body = await res.json().catch(() => ({}))
                 throw new Error(body.error || `Request failed: ${res.status}`)
             }
-
+            
             const data = await res.json().catch(() => ({}));
-            console.log("Signup email: ", email, "password: ", password, data.message);
+            console.log(data)
+            setUser(data)
+            localStorage.setItem("user", JSON.stringify(data))
+            navigate('/profile')
 
         } catch (err) {
             console.log(err)
         }           
     }
-
 
     return (
         <div className='login-page'>
