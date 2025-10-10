@@ -87,7 +87,7 @@
 }
 
 .billing-this-month-card > h3 {
-    border-bottom: 1px solid rgba(192, 192, 192, 1);
+  border-bottom: 1px solid rgba(192, 192, 192, 1);
 }
 
 /* eksempel-layout for tre-kolonne på større skjermer */
@@ -114,6 +114,11 @@
     width: 700px;
     border: 1px solid black;
 }
+
+.add-new-hours-card > h3 {
+  border-bottom: 1px solid rgba(192, 192, 192, 1);
+}
+
 .history-card .billing-history {
   overflow-x: auto;
 }
@@ -180,10 +185,6 @@
   max-width: 350px;
 }
 
-.add-new-hours-card > h3 {
-    border-bottom: 1px solid rgba(192, 192, 192, 1);
-} 
-
 .dropdown-activity {
     width: 100%;
     box-sizing: border-box;
@@ -207,14 +208,22 @@
     font-family: 'Times New Roman', Times, serif;
   }
   
-.add-new-hours-header {
+.select-activity-field {
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 1rem;
+  gap: 20px;
 }
 
-.add-new-hours-header svg, 
-.add-new-hours-header .icon {
-  justify-self: end;
+.select-date-field {
+  display: grid;
+  gap: 20px;
+} 
+
+.add-start-time {
+  display: grid;
+  gap: 20px;
+}
+
+.add-end-time {
+  display: grid;
+  gap: 20px;
 }

@@ -31,6 +31,8 @@ const Home = () => {
     })*/
 
     /*husk å legge til ekte data når databasen er opp */
+
+
     
     return (
         <>
@@ -40,7 +42,7 @@ const Home = () => {
                     <div className='billing-page-header'>
                         <h1>Your billing information</h1>
                         <div className='btn-group'>
-                            <button type='button' className="btn">Edit</button>
+                            <button type='button' className="btn">Submit new hours</button>
                             <button type='button' className="btn">FAQ</button>
                         </div>
                     </div>
@@ -68,10 +70,7 @@ const Home = () => {
                         </div>
 
                         <div className='add-new-hours-card card-section'>
-                            <div className='add-new-hours-header'>
-                                <h3>Add new hours</h3>
-                                <AddIcon />
-                            </div>
+                            <h3>Add new hours</h3>
                             <div className='add-hours-inputfields'>
                                 <div className='select-activity-field'>
                                     <label>Select an activity*</label>
@@ -128,7 +127,8 @@ const Home = () => {
 
                     <div className='history-card card-section'>
                         <div className='billing-history'>
-                    
+                            <h3>History</h3>
+                            
                         </div>
                     </div>
                 </section>
