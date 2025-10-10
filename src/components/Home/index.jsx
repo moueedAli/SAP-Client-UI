@@ -3,35 +3,51 @@ import { Header, Footer } from '../Profile';
 import AddIcon from '../../icons/add-icon';
 import { useState } from 'react';
 
+export const Timesheet = ({ entries }) => {
+    return (
+        <div className="timesheet" role="table" aria-label="Timesheet">
+           <div class="header">
+                <p class="col billing">Billing number</p>
+                <p class="col activity">Activity</p>
+                <p class="col date">Date</p>
+                <p class="col start">Start time</p>
+                <p class="col end">End time</p>
+                <p class="col total">Total hours</p>
+            </div>
+    
+          <div className="body" role="rowgroup">
+            {entries.map((e, i) => (
+              <div className="row" role="row" key={e.id ?? i}>
+                <p className="col billing" role="cell">{e.billing}</p>
+                <p className="col activity" role="cell">{e.activity}</p>
+                <p className="col date" role="cell">{e.date}</p>
+                <p className="col start" role="cell">{e.start}</p>
+                <p className="col end" role="cell">{e.end}</p>
+                <p className="col total" role="cell">{e.total}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+    );
+}
+
 const Home = () => {
-    const [selectedValue, setSelectedValue] = useState("option1"); /* startverdi i usestate må ha en av option verdiene for å vise valg umiddelbart*/ 
+    const [selectedActivity, setSelectedActivity] = useState("option1"); /* startverdi i usestate må ha en av option verdiene for å vise valg umiddelbart*/ 
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("")
 
-    const handleActivityChange = (e) => {
-        setSelectedValue(e.target.value);
-    };
-
-    const handleDateChange = (e) => {
-        setDate(e.taget.value)
-    }
-
-    const handleStartTimeChange = (e) => {
-        setStartTime(e.target.value)
-    }
-
-    const handleEndTimeChange = (e) => {
-        setEndTime(e.target.value)
-    } 
-
-    /* ta med richard neste møte om hvilke data som sendes
-    const [newTimeEntry, setNewTimeEntry] = useState({
-        
-    })*/
+    
 
     /*husk å legge til ekte data når databasen er opp */
-
+    const [entries, setEntries] = useState([
+        { id: 1, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
+          date: "10-09-2023", start: "07:30 UTC", end: "15:30 UTC", total: 8 },
+        { id: 1, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
+            date: "10-09-2023", start: "07:30 UTC", end: "14:30 UTC", total: 7 },
+        { id: 1, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
+            date: "10-09-2023", start: "10:30 UTC", end: "15:30 UTC", total: 5 }
+    ]);
 
     return (
         <>
@@ -76,8 +92,8 @@ const Home = () => {
                                     <select
                                         id="activity-select"
                                         className="dropdown-activity"
-                                        value={selectedValue}
-                                        onChange={handleActivityChange}
+                                        value={selectedActivity}
+                                        onChange={(event) => setSelectedActivity(event.target.value)}
                                     >
                                         <option value="option1">Option 1</option>
                                         <option value="option2">Option 2</option>
@@ -92,7 +108,7 @@ const Home = () => {
                                         id="date-native"
                                         type="date"
                                         value={date}
-                                        onChange={handleDateChange}
+                                        onChange={(event) => setDate(event.target.value)}
                                         className="date-input"
                                     />
                                 </div>
@@ -103,7 +119,7 @@ const Home = () => {
                                         id='time-native'
                                         type='time'
                                         value={startTime}
-                                        onChange={handleStartTimeChange}
+                                        onChange={(event) => setStartTime(event.target.value)}
                                         step="1"
                                         className='time-input'
                                     />
@@ -115,7 +131,7 @@ const Home = () => {
                                         id='time-native'
                                         type='time'
                                         value={endTime}
-                                        onChange={handleEndTimeChange}
+                                        onChange={(event) =>setEndTime(event.target.value)}
                                         step="1"
                                         className='time-input'
                                     />
@@ -127,7 +143,11 @@ const Home = () => {
                     <div className='history-card card-section'>
                         <div className='billing-history'>
                             <h3>History</h3>
-                            
+                            <div className='history-card-content'>
+                                <div className='history-card-content-header'>             
+                                   <Timesheet entries={entries}/>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </section>
