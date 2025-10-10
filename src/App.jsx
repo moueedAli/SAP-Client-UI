@@ -4,6 +4,7 @@ import Login from './components/Login'
 import './App.css'
 import Profile from './components/Profile'
 import { useEffect, useState } from 'react'
+import Home from './components/Home'
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -25,6 +26,7 @@ function App() {
           <Route path='/register' element={<RegisterForm setUser={setUser}/>}/>
           <Route path='/login' element={<Login setUser={setUser}/>} />
           <Route path='/profile' element={<Profile user={user}/>} />
+          <Route path='/home' element={<Home />}/> /* muligens sende brukerdata her  */
 
         </Routes>
       </BrowserRouter>

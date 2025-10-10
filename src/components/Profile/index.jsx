@@ -8,10 +8,9 @@ export const Header = () => {
                 <div className="brand">SAP 2.0</div>
 
                 <nav className="main-nav" aria-label="Main navigation">
-                    <a href="/" className="nav-link">Home</a>
+                    <a href="/home" className="nav-link">Home</a>
                     <a href="/about" className="nav-link">About</a>
                     <a href="/profile" className="nav-link active">Profile</a>
-                    <a href="/services" className="nav-link">Services</a>
                 </nav>
 
                 <div className="header-actions">
@@ -48,7 +47,6 @@ export const Footer = () => {
         </>
     );
 }
-
 
 const Profile = ({ user }) => {
 
