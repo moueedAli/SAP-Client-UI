@@ -1,18 +1,18 @@
 import './home.css'
 import { Header, Footer } from '../Profile';
 import AddIcon from '../../icons/add-icon';
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 
 export const Timesheet = ({ entries }) => {
     return (
         <div className="timesheet" role="table" aria-label="Timesheet">
-           <div class="header">
-                <p class="col billing">Billing number</p>
-                <p class="col activity">Activity</p>
-                <p class="col date">Date</p>
-                <p class="col start">Start time</p>
-                <p class="col end">End time</p>
-                <p class="col total">Total hours</p>
+           <div className="header">
+                <p className="col billing">Billing number</p>
+                <p className="col activity">Activity</p>
+                <p className="col date">Date</p>
+                <p className="col start">Start time</p>
+                <p className="col end">End time</p>
+                <p className="col total">Total hours</p>
             </div>
     
           <div className="body" role="rowgroup">
@@ -36,16 +36,29 @@ const Home = () => {
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("")
+    const [userId, setUserId] = useState(null)
+    const userObj = localStorage.getItem('user')
 
-    
+    useEffect(() => {
+        if (userObj) {
+            try {
+                const token = JSON.parse(userObj)
+                setUserId(token.id)
+            } catch (err) {
+                console.error(err)
+            }
+        } else {
+            console.warn('No userObj found for this user')
+        }
+    }, )
 
     /*husk å legge til ekte data når databasen er opp */
     const [entries, setEntries] = useState([
         { id: 1, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
           date: "10-09-2023", start: "07:30 UTC", end: "15:30 UTC", total: 8 },
-        { id: 1, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
+        { id: 2, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
             date: "10-09-2023", start: "07:30 UTC", end: "14:30 UTC", total: 7 },
-        { id: 1, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
+        { id: 3, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
             date: "10-09-2023", start: "10:30 UTC", end: "15:30 UTC", total: 5 }
     ]);
 
