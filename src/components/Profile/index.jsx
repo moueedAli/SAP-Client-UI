@@ -13,7 +13,7 @@ export const Header = () => {
                 <nav className="main-nav" aria-label="Main navigation">
                     <a href="/home" className="nav-link">Home</a>
                     <a href="/about" className="nav-link">About</a>
-                    <a href="/profile" className="nav-link active">Profile</a>
+                    <a href="/profile" className="nav-link ">Profile</a>
                 </nav>
 
                 <div className="header-actions">
