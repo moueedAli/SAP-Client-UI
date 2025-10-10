@@ -50,7 +50,7 @@ const Home = () => {
         } else {
             console.warn('No userObj found for this user')
         }
-    }, )
+    }, [userObj])
 
     /*husk å legge til ekte data når databasen er opp */
     const [entries, setEntries] = useState([
