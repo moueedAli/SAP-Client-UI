@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import './profile.css'
 
 export const Header = () => {
+  const navigate = useNavigate()
+
     return (
         <>
             <header className="site-header">
@@ -17,8 +20,10 @@ export const Header = () => {
                     <button
                         className="search-btn"
                         aria-label="Open search"
-                        type="button">
-                    Search
+                        type="button"
+                        onClick={() => navigate('/login')}
+                        >
+                    Log out
                     </button>
                 </div>
                 </div>

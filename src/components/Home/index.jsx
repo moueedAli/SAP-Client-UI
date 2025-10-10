@@ -33,7 +33,6 @@ const Home = () => {
     /*husk å legge til ekte data når databasen er opp */
 
 
-    
     return (
         <>
         <Header />
