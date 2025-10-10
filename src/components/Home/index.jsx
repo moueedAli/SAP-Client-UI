@@ -48,8 +48,7 @@ const Home = () => {
             date: "10-09-2023", start: "10:30 UTC", end: "15:30 UTC", total: 5 }
     ]);
     const [billingCode, setBillingCode] = useState(null);
-    const [salary, setSalary] = useState(null)
-    const url = `${API_URL}/billingcodes/${billingCode}`;
+    const [salary, setSalary] = useState(0);
 
     useEffect(() => {
         if (userObj) {
@@ -65,30 +64,25 @@ const Home = () => {
         }
     }, [userObj])
     
-    const fetchBillingObject = async (e) => {
-        e.preventDefault()
+
+    const fetchBillingObject = async () => {
             
         if (!billingCode) return;
-            
+        
         try {
-            const response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+            const response = await fetch(`http://localhost:8080/billingcodes/${billingCode}`)
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
                 
             const data = await response.json()
-            setSalary("data", data)
-
+            setSalary(data.salary)
         } catch (err) {
             console.error("Failed to fetch billing info:", err)
         }
     }    
+    fetchBillingObject()
 
     const addNewTimeEntry = async (e) => {
         e.preventDefault()
@@ -102,7 +96,7 @@ const Home = () => {
         }
 
         try {
-            const res = await fetch(url, {
+            const res = await fetch(`console.log("Fetched data:", data)`, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
@@ -116,7 +110,7 @@ const Home = () => {
             }
 
         } catch (err) {
-            console.log(err)
+            console.error("Failed to fetch billing info:", err)
         }   
     }
 
@@ -149,7 +143,7 @@ const Home = () => {
                                 <input  
                                     className='accumulated-pay'
                                     type='number'
-                                    value={26734}
+                                    value={salary}
                                     readOnly
                                 />
                             </div>
@@ -202,7 +196,7 @@ const Home = () => {
                                         id='time-native'
                                         type='time'
                                         value={endTime}
-                                        onChange={(event) =>setEndTime(event.target.value)}
+                                        onChange={(event) => setEndTime(event.target.value)}
                                         step="1"
                                         className='time-input'
                                     />
