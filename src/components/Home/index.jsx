@@ -17,6 +17,7 @@ const Home = () => {
     const [userId, setUserId] = useState(null);
     const [entries, setEntries] = useState([]);
 
+    const [dummyNumber, setDummyNumber] = useState(0)
     /*henter brukerdata fra localstorage */
     useEffect(() => {
       const userObj = localStorage.getItem("user");
@@ -73,6 +74,8 @@ const Home = () => {
     }, []);
   
     /*henter alle time entries gitt en brukerid */
+
+  useEffect(() => {
     const fetchTimeEntries = async () => {
       if (userId) {
         try {
@@ -86,10 +89,8 @@ const Home = () => {
         return;
       }
     };
-
-    useEffect(() => {
-      fetchTimeEntries();
-    }, );
+    fetchTimeEntries();
+  }, [userId,dummyNumber]);
 
     const addNewTimeEntry = async (e) => {
         e.preventDefault()
@@ -117,7 +118,8 @@ const Home = () => {
                 throw new Error(body.error || `Request failed: ${res.status}`)
             }
 
-            fetchTimeEntries()
+            
+      setDummyNumber(dummyNumber+1)
 
         } catch (err) {
             console.error("Failed to  add entry  info:", err)
