@@ -33,7 +33,8 @@ export const Timesheet = ({ entries }) => {
 }
 
 const Home = () => {
-    const [selectedActivity, setSelectedActivity] = useState("option1"); /* startverdi i usestate må ha en av option verdiene for å vise valg umiddelbart*/ 
+    const [selectedActivity, setSelectedActivity] = useState(""); 
+    const [activities, setActivities ] = useState([]);
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("")
@@ -64,13 +65,14 @@ const Home = () => {
         }
     }, [userObj])
     
+  const URL = "http://localhost:8080"
 
     const fetchBillingObject = async () => {
             
         if (!billingCode) return;
         
         try {
-            const response = await fetch(`http://localhost:8080/billingcodes/${billingCode}`)
+            const response = await fetch(`${URL}/billingcodes${billingCode}`)
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`)
@@ -82,7 +84,6 @@ const Home = () => {
             console.error("Failed to fetch billing info:", err)
         }
     }    
-    fetchBillingObject()
 
     const addNewTimeEntry = async (e) => {
         e.preventDefault()
@@ -96,7 +97,7 @@ const Home = () => {
         }
 
         try {
-            const res = await fetch(`console.log("Fetched data:", data)`, {
+            const res = await fetch(`${URL}/timeEntry`, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
@@ -113,6 +114,21 @@ const Home = () => {
             console.error("Failed to fetch billing info:", err)
         }   
     }
+
+  useEffect(()=>{
+    const fetchActivities = async ()=>{
+      const response = await fetch(`${URL}/activities`);
+      const jsonData = await response.json();
+      setActivities(jsonData)
+      setSelectedActivity(jsonData[0].name)
+    };
+
+    fetchActivities();
+  },[])
+  
+
+
+
 
     return (
         <>
@@ -160,10 +176,8 @@ const Home = () => {
                                         value={selectedActivity}
                                         onChange={(event) => setSelectedActivity(event.target.value)}
                                     >
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <option value="option4">Option 4</option>
+                                        {activities.map((a,key)=>
+                                        <option key={key} value={a.name}> {a.name} </option>)}
                                     </select>
                                 </div>
 
@@ -222,4 +236,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Home
