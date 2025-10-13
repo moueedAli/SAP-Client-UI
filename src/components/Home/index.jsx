@@ -89,19 +89,26 @@ const Home = () => {
       fetchTimeEntries();
     }, [activities, userId]);
   
+
+
+
+
     const addNewTimeEntry = async (e) => {
         e.preventDefault()
+        const acitivity = activities.find(e=>e.name === selectedActivity)
 
         const payload = {
-            userId, 
-            selectedActivity,
-            date,
-            startTime,
-            endTime,
+            user_id: userId, 
+            activity_id: acitivity.id,
+            date: date,
+            start_time: startTime,
+            end_time: endTime,
         }
 
+    console.log(payload)
+
         try {
-            const res = await fetch(`console.log("Fetched data:", data)`, {
+            const res = await fetch(`${API_URL}/timeEntry`, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
@@ -115,7 +122,7 @@ const Home = () => {
             }
 
         } catch (err) {
-            console.error("Failed to fetch billing info:", err)
+            console.error("Failed to  add entry  info:", err)
         }   
     }
 
