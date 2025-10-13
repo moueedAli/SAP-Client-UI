@@ -1,7 +1,7 @@
 import './home.css'
 import { Header, Footer } from '../Profile';
 import AddIcon from '../../icons/add-icon';
-import { act, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { API_URL } from '../../service/constant';
 import Timesheet from '../Timesheet';
 
@@ -16,7 +16,7 @@ const Home = () => {
 
     const [userId, setUserId] = useState(null);
     const [entries, setEntries] = useState([]);
-    
+
     /*henter brukerdata fra localstorage */
     useEffect(() => {
       const userObj = localStorage.getItem("user");
@@ -119,6 +119,7 @@ const Home = () => {
         }   
     }
 
+    const totalHoursWorked = (entries ?? []).reduce((sum, entry) => sum + entry.total_hours, 0);
 
     return (
         <>
@@ -129,7 +130,6 @@ const Home = () => {
                         <h1>Your billing information</h1>
                         <div className='btn-group'>
                             <button type='button' className="btn" onClick={addNewTimeEntry}>Submit new hours</button>
-                            <button type='button' className="btn">FAQ</button>
                         </div>
                     </div>
 
@@ -141,7 +141,7 @@ const Home = () => {
                                 <input
                                     className='accumulated-hours'
                                     type='number'
-                                    value={72.5}
+                                    value={totalHoursWorked ?? 0}  
                                     readOnly
                                 />
 
@@ -149,7 +149,7 @@ const Home = () => {
                                 <input  
                                     className='accumulated-pay'
                                     type='number'
-                                    value={Math.round((salary/1800)*72.5)}
+                                    value={Math.round((salary/1800)*totalHoursWorked)}
                                     readOnly
                                 />
                             </div>
