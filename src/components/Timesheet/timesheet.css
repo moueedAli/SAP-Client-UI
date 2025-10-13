@@ -1,0 +1,33 @@
+.header, .row {
+    display: grid;
+    grid-template-columns: 160px 1fr 120px 120px 120px 90px;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .header {
+    background: #f5f7fa;
+    border-bottom: 2px solid #e1e5ea;
+    font-weight: 700;
+    color: #111827;
+  }
+  .row {
+    border-bottom: 1px solid #eceef3;
+    color: #111827;
+  }
+  .col { margin: 0; padding: 4px 8px; }
+  
+  /* Små skjermer: gjør hver rad til enkel kolonne */
+  @media (max-width: 720px) {
+    .header { display: none; } /* skjul header hvis du heller vil vise label per linje */
+    .row { grid-template-columns: 1fr; gap: 4px; padding: 10px; }
+    .col { padding: 6px 0; }
+    .col.billing::before { content: "Billing number: "; font-weight: 700; }
+    .col.activity::before { content: "Activity: "; font-weight: 700; }
+    .col.date::before { content: "Date: "; font-weight: 700; }
+    .col.start::before { content: "Start time: "; font-weight: 700; }
+    .col.end::before { content: "End time: "; font-weight: 700; }
+    .col.total::before { content: "Total hours: "; font-weight: 700; }
+  }
+  
+  

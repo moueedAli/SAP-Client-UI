@@ -1,90 +1,94 @@
 import './home.css'
 import { Header, Footer } from '../Profile';
 import AddIcon from '../../icons/add-icon';
-import { useEffect, useState } from 'react';
+import { act, useEffect, useState } from 'react';
 import { API_URL } from '../../service/constant';
-
-export const Timesheet = ({ entries }) => {
-    return (
-        <div className="timesheet" role="table" aria-label="Timesheet">
-           <div className="header">
-                <p className="col billing">Billing number</p>
-                <p className="col activity">Activity</p>
-                <p className="col date">Date</p>
-                <p className="col start">Start time</p>
-                <p className="col end">End time</p>
-                <p className="col total">Total hours</p>
-            </div>
-    
-          <div className="body" role="rowgroup">
-            {entries.map((e, i) => (
-              <div className="row" role="row" key={e.id ?? i}>
-                <p className="col billing" role="cell">{e.billing}</p>
-                <p className="col activity" role="cell">{e.activity}</p>
-                <p className="col date" role="cell">{e.date}</p>
-                <p className="col start" role="cell">{e.start}</p>
-                <p className="col end" role="cell">{e.end}</p>
-                <p className="col total" role="cell">{e.total}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-    );
-}
+import Timesheet from '../Timesheet';
 
 const Home = () => {
-    const [selectedActivity, setSelectedActivity] = useState(""); 
-    const [activities, setActivities ] = useState([]);
+    const [selectedActivity, setSelectedActivity] = useState("");
+    const [activities, setActivities] = useState([]);
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("")
-    const [userId, setUserId] = useState(null)
-    const userObj = localStorage.getItem('user')
-    const [entries, setEntries] = useState([
-        { id: 1, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
-          date: "10-09-2023", start: "07:30 UTC", end: "15:30 UTC", total: 8 },
-        { id: 2, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
-            date: "10-09-2023", start: "07:30 UTC", end: "14:30 UTC", total: 7 },
-        { id: 3, billing: "#2023-2025", activity: "Produkt- og tjenesteutvikling (interprosjekt)",
-            date: "10-09-2023", start: "10:30 UTC", end: "15:30 UTC", total: 5 }
-    ]);
+    const [endTime, setEndTime] = useState("");
     const [billingCode, setBillingCode] = useState(null);
     const [salary, setSalary] = useState(0);
 
-    useEffect(() => {
-        if (userObj) {
-            try {
-                const token = JSON.parse(userObj)
-                setUserId(token.id)
-                setBillingCode(token.billing_code_id)
-            } catch (err) {
-                console.error(err)
-            }
-        } else {
-            console.warn('No userObj found for this user')
-        }
-    }, [userObj])
+    const [userId, setUserId] = useState(null);
+    const [entries, setEntries] = useState([]);
     
-  const URL = "http://localhost:8080"
-
-    const fetchBillingObject = async () => {
-            
-        if (!billingCode) return;
-        
+    /*henter brukerdata fra localstorage */
+    useEffect(() => {
+      const userObj = localStorage.getItem("user");
+      if (userObj) {
         try {
-            const response = await fetch(`${URL}/billingcodes${billingCode}`)
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`)
-            }
-                
-            const data = await response.json()
-            setSalary(data.salary)
+          const token = JSON.parse(userObj);
+          setUserId(token.id);
+          setBillingCode(token.billing_code_id);
         } catch (err) {
-            console.error("Failed to fetch billing info:", err)
+          console.error("Failed to parse user object:", err);
         }
-    }    
-
+      } else {
+        console.warn("No userObj found for this user");
+      }
+    }, []);
+  
+    /*henter informasjon om lønn gitt billing_code_id */
+    useEffect(() => {
+      const fetchBillingObject = async () => {
+        if (!billingCode) return;
+  
+        try {
+          const response = await fetch(`${API_URL}/billingcodes/${billingCode}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          setSalary(data.salary);
+        } catch (err) {
+          console.error("Failed to fetch billing info:", err);
+        }
+      };
+  
+      fetchBillingObject();
+    }, [billingCode]);
+  
+    /*henter alle aktiviteter og lagrer i activites (dropdown meny) */
+    useEffect(() => {
+      const fetchActivities = async () => {
+        try {
+          const response = await fetch(`${API_URL}/activities`);
+          const jsonData = await response.json();
+          setActivities(jsonData);
+          if (jsonData.length > 0) {
+            setSelectedActivity(jsonData[0].name);
+          }
+        } catch (err) {
+          console.error("Failed to fetch activities:", err);
+        }
+      };
+  
+      fetchActivities();
+    }, []);
+  
+    /*henter alle time entries gitt en brukerid */
+    useEffect(() => {
+      if (!userId) return;
+  
+      const fetchTimeEntries = async () => {
+        try {
+          const response = await fetch(`${API_URL}/users/entries/${userId}`);
+          const data = await response.json();
+          setEntries(data);
+        } catch (err) {
+          console.error("Failed to fetch time entries:", err);
+        }
+      };
+  
+      fetchTimeEntries();
+    }, [activities, userId]);
+  
     const addNewTimeEntry = async (e) => {
         e.preventDefault()
 
@@ -97,7 +101,7 @@ const Home = () => {
         }
 
         try {
-            const res = await fetch(`${URL}/timeEntry`, {
+            const res = await fetch(`console.log("Fetched data:", data)`, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
@@ -114,20 +118,6 @@ const Home = () => {
             console.error("Failed to fetch billing info:", err)
         }   
     }
-
-  useEffect(()=>{
-    const fetchActivities = async ()=>{
-      const response = await fetch(`${URL}/activities`);
-      const jsonData = await response.json();
-      setActivities(jsonData)
-      setSelectedActivity(jsonData[0].name)
-    };
-
-    fetchActivities();
-  },[])
-  
-
-
 
 
     return (
@@ -159,7 +149,7 @@ const Home = () => {
                                 <input  
                                     className='accumulated-pay'
                                     type='number'
-                                    value={salary}
+                                    value={Math.round((salary/1800)*72.5)}
                                     readOnly
                                 />
                             </div>
@@ -224,7 +214,7 @@ const Home = () => {
                             <h3>History</h3>
                             <div className='history-card-content'>
                                 <div className='history-card-content-header'>             
-                                   <Timesheet entries={entries}/>
+                                   <Timesheet entries={entries} activities={activities}/>
                                 </div>
                             </div>                            
                         </div>
