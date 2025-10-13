@@ -14,7 +14,7 @@ const Timesheet = ({ entries, activities }) => {
             </div>
     
           <div className="body" role="rowgroup">
-            {entries.map((e, i) => (
+            {entries?.map((e, i) => (
               <div className="row" role="row" key={e.id ?? i}>
                 <p className='col billing' role='cell'></p>
                 <p className="col activity" role="cell">{activities[e.activity_id-1].name}</p>
