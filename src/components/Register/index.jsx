@@ -51,65 +51,65 @@ const RegisterForm = ({ setUser }) => {
 
     return (
         <div className="register-hero">
-          <div className="register-card">
-            <h2>Register your profile</h2>
-            <form className="register-form" onSubmit={handleSignup}>
-              <input 
-                type="email" 
-                placeholder="Enter email" 
-                value={email} 
-                onChange={(e)=>setEmail(e.target.value)} 
-                required
-              />
+            <div className="register-card">
+                <h2>Register your profile</h2>
+                <form className="register-form" onSubmit={handleSignup}>
+                    <input 
+                        type="email" 
+                        placeholder="Enter email" 
+                        value={email} 
+                        onChange={(e)=>setEmail(e.target.value)} 
+                        required
+                    />
 
-              <input 
-                type="text" 
-                placeholder="First name" 
-                value={first_name} 
-                onChange={(e)=>setFirst_name(e.target.value)} 
-                required   
-              />
+                    <input 
+                        type="text" 
+                        placeholder="First name" 
+                        value={first_name} 
+                        onChange={(e)=>setFirst_name(e.target.value)} 
+                        required   
+                    />
 
-              <input 
-                type="text" 
-                placeholder="Last name" 
-                value={last_name} 
-                onChange={(e)=>setLast_name(e.target.value)} 
-                required 
-              />
-              
-              <input 
-                type="tel" 
-                placeholder="Mobile number" 
-                value={mobile} 
-                onChange={(e)=>setMobile(e.target.value)} 
-                required 
-              />
-              
-              <div className="input-with-icon">
-                <input 
-                  type="password" 
-                  placeholder="Enter password" 
-                  value={password} 
-                  onChange={(e)=>setPassword(e.target.value)} 
-                  required 
-                />
-              </div>
-              <button 
-                type="submit" 
-                onClick={() => navigate(`/profile`)}>
-                  Submit
-              </button>
-              
-              <button 
-                type="submit" 
-                onClick={() => navigate(`/login`)}>
-                  Login
-              </button>
-            </form>
-          </div>
+                    <input 
+                        type="text" 
+                        placeholder="Last name" 
+                        value={last_name} 
+                        onChange={(e)=>setLast_name(e.target.value)} 
+                        required 
+                    />
+
+                    <input 
+                        type="tel" 
+                        placeholder="Mobile number" 
+                        value={mobile} 
+                        onChange={(e)=>setMobile(e.target.value)} 
+                        required 
+                    />
+
+                    <div className="input-with-icon">
+                        <input 
+                            type="password" 
+                            placeholder="Enter password" 
+                            value={password} 
+                            onChange={(e)=>setPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <button 
+                        type="submit" 
+                        onClick={() => navigate(`/profile`)}>
+                        Submit
+                    </button>
+
+                    <button 
+                        type="submit" 
+                        onClick={() => navigate(`/login`)}>
+                        Login
+                    </button>
+                </form>
+            </div>
         </div>
-      );
+    );
 }
 
 export default RegisterForm;
