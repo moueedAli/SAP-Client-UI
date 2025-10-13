@@ -148,7 +148,7 @@ const Home = () => {
                                 <input
                                     className='accumulated-hours'
                                     type='number'
-                                    value={totalHoursWorked ?? 0}  
+                                    value={totalHoursWorked}  
                                     readOnly
                                 />
 
