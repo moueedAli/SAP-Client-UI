@@ -73,10 +73,8 @@ const Home = () => {
     }, []);
   
     /*henter alle time entries gitt en brukerid */
-    useEffect(() => {
-      if (!userId) return;
-  
-      const fetchTimeEntries = async () => {
+    const fetchTimeEntries = async () => {
+      if (userId) {
         try {
           const response = await fetch(`${API_URL}/users/entries/${userId}`);
           const data = await response.json();
@@ -84,14 +82,14 @@ const Home = () => {
         } catch (err) {
           console.error("Failed to fetch time entries:", err);
         }
-      };
-  
+      } else {
+        return;
+      }
+    };
+
+    useEffect(() => {
       fetchTimeEntries();
-    }, [activities, userId]);
-  
-
-
-
+    }, );
 
     const addNewTimeEntry = async (e) => {
         e.preventDefault()
@@ -104,8 +102,6 @@ const Home = () => {
             start_time: startTime,
             end_time: endTime,
         }
-
-    console.log(payload)
 
         try {
             const res = await fetch(`${API_URL}/timeEntry`, {
@@ -120,6 +116,8 @@ const Home = () => {
                 const body = await res.json().catch(() => ({}))
                 throw new Error(body.error || `Request failed: ${res.status}`)
             }
+
+            fetchTimeEntries()
 
         } catch (err) {
             console.error("Failed to  add entry  info:", err)
