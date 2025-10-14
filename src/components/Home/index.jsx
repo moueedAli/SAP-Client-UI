@@ -1,11 +1,11 @@
 import './home.css'
 import { useEffect, useState } from 'react';
 import { API_URL } from '../../service/constant';
-import Timesheet from '../Timesheet';
 import BillingInfoCard from '../BillingInfo';
 import AddHours from '../AddHours';
 import Header from '../Header';
 import Footer from '../Footer';
+import TimesheetDays from '../TimesheetDays';
 
 const Home = ({ user }) => {
     const [selectedActivity, setSelectedActivity] = useState("");
@@ -15,7 +15,7 @@ const Home = ({ user }) => {
     const [endTime, setEndTime] = useState("");
     const [billingCode, setBillingCode] = useState(null);
     const [salary, setSalary] = useState(0);
-    const [entries, setEntries] = useState([]);
+    const [days, setDays] = useState([]);
 
     const [userId, setUserId] = useState(null);
 
@@ -70,19 +70,17 @@ const Home = ({ user }) => {
                 console.error("Failed to fetch activities:", err);
             }
         };
-
         fetchActivities();
     }, []);
 
-    /*henter alle time entries gitt en brukerid */
-
+    /*henter alle dager for en gitt brukerid */
     useEffect(() => {
         const fetchTimeEntries = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`${API_URL}/users/entries/${userId}`);
+                    const response = await fetch(`${API_URL}/days/${userId}`);
                     const data = await response.json();
-                    setEntries(data);
+                    setDays(data);
                 } catch (err) {
                     console.error("Failed to fetch time entries:", err);
                 }
@@ -126,8 +124,6 @@ const Home = ({ user }) => {
         }   
     }
 
-    const totalHoursWorked = (entries ?? []).reduce((sum, entry) => sum + entry.total_hours, 0);
-
     return (
         <>
             <Header />
@@ -141,7 +137,7 @@ const Home = ({ user }) => {
                     </div>
 
                     <div className='billing-cards-first-half'>
-                        <BillingInfoCard totalHoursWorked={totalHoursWorked} salary={salary}/>
+                        <BillingInfoCard totalHoursWorked={2} salary={salary}/>
 
                         <div className='add-new-hours-card card-section'>
                             <AddHours 
@@ -162,8 +158,8 @@ const Home = ({ user }) => {
                         <div className='billing-history'>
                             <h3>History</h3>
                             <div className='history-card-content'>
-                                <div className='history-card-content-header'>             
-                                    <Timesheet entries={entries} activities={activities}/>
+                                <div className='history-card-content-header'>  
+                                    <TimesheetDays days={days} />           
                                 </div>
                             </div>                            
                         </div>
@@ -176,3 +172,9 @@ const Home = ({ user }) => {
 }
 
 export default Home
+
+/*    const totalHoursWorked = (days ?? []).reduce((sum, entry) => sum + entry.total_hours, 0);
+*/
+
+/*
+ */
