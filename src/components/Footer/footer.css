@@ -1,0 +1,29 @@
+.site-footer{
+    background: var(--footer-bg); /* eller var(--nav-bg) om du vil matche header */
+    color:#fff;
+    padding:18px 0;
+    margin-top: 0;       /* <- fjern mellomrommet over footer */
+  }
+  
+  .footer-inner {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .footer-left { display:flex; gap:12px; align-items:center; }
+  .icon-btn, .icon-link {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px;
+    border: none;
+    text-decoration: none;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:36px;
+    height:36px;
+  }
+  .footer-right { display:flex; gap:16px; align-items:center; }
+  .footer-contact { color: rgba(255,255,255,0.92); text-decoration:none; font-size:22px; }
+  

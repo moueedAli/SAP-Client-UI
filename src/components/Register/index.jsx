@@ -4,7 +4,6 @@ import { API_URL } from "../../service/constant";
 import './register.css'
 import { useNavigate } from "react-router-dom";
 
-
 const RegisterForm = ({ setUser }) => {    
     const [email, setEmail] = useState("");
     const [first_name, setFirst_name] = useState("");

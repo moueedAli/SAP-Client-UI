@@ -1,13 +1,13 @@
 import './home.css'
-import { Header, Footer } from '../Profile';
-import AddIcon from '../../icons/add-icon';
-import { act, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { API_URL } from '../../service/constant';
 import Timesheet from '../Timesheet';
 import BillingInfoCard from '../BillingInfo';
 import AddHours from '../AddHours';
+import Header from '../Header';
+import Footer from '../Footer';
 
-const Home = () => {
+const Home = ({ user }) => {
     const [selectedActivity, setSelectedActivity] = useState("");
     const [activities, setActivities] = useState([]);
     const [date, setDate] = useState("");
@@ -15,26 +15,25 @@ const Home = () => {
     const [endTime, setEndTime] = useState("");
     const [billingCode, setBillingCode] = useState(null);
     const [salary, setSalary] = useState(0);
-
-    const [userId, setUserId] = useState(null);
     const [entries, setEntries] = useState([]);
 
+    const [userId, setUserId] = useState(null);
+
     const [dummyNumber, setDummyNumber] = useState(0)
+    
     /*henter brukerdata fra localstorage */
     useEffect(() => {
-        const userObj = localStorage.getItem("user");
-        if (userObj) {
+        if (user) {
             try {
-                const token = JSON.parse(userObj);
-                setUserId(token.id);
-                setBillingCode(token.billing_code_id);
+                setUserId(user.id);
+                setBillingCode(user.billing_code_id);
             } catch (err) {
                 console.error("Failed to parse user object:", err);
             }
         } else {
             console.warn("No userObj found for this user");
         }
-    }, []);
+    }, [user]);
 
     /*henter informasjon om lønn gitt billing_code_id */
     useEffect(() => {
@@ -119,7 +118,6 @@ const Home = () => {
                 const body = await res.json().catch(() => ({}))
                 throw new Error(body.error || `Request failed: ${res.status}`)
             }
-
 
             setDummyNumber(dummyNumber+1)
 

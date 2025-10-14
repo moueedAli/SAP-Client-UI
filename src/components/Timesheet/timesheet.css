@@ -29,5 +29,12 @@
     .col.end::before { content: "End time: "; font-weight: 700; }
     .col.total::before { content: "Total hours: "; font-weight: 700; }
   }
+    
+.history-card .billing-history {
+  overflow-x: auto;
+}
   
-  
+.billing-history > h3 {
+  border-bottom: 1px solid rgba(192, 192, 192, 1);
+}
+    

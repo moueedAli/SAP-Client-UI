@@ -1,57 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import './profile.css'
-
-export const Header = () => {
-    const navigate = useNavigate()
-
-    return (
-        <>
-            <header className="site-header">
-                <div className="container header-inner">
-                    <div className="brand">SAP 2.0</div>
-
-                    <nav className="main-nav" aria-label="Main navigation">
-                        <a href="/home" className="nav-link">Home</a>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/profile" className="nav-link ">Profile</a>
-                    </nav>
-
-                    <div className="header-actions">
-                        <button
-                            className="search-btn"
-                            aria-label="Open search"
-                            type="button"
-                            onClick={() => navigate('/login')}
-                        >
-                            Log out
-                        </button>
-                    </div>
-                </div>
-            </header>
-        </>
-    );
-}
-
-export const Footer = () => {
-    return (
-        <>
-            <footer className="site-footer">
-                <div className="container footer-inner">
-                    <div className="footer-left">
-                        <button className="icon-btn" aria-label="Settings">⚙️</button>
-                        <a className="icon-link" href="https://facebook.com" aria-label="Facebook">f</a>
-                        <a className="icon-link" href="https://instagram.com" aria-label="Instagram">ig</a>
-                    </div>
-
-                    <div className="footer-right">
-                        <a className="footer-contact" href={`mailto: help@experis.com`}>{'help@experis.com'}</a>
-                        <span className="footer-contact">{'40404040'}</span>
-                    </div>
-                </div>
-            </footer>
-        </>
-    );
-}
+import Header from '../Header';
+import Footer from '../Footer';
 
 const Profile = ({ user }) => {
 
