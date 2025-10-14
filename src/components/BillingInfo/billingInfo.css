@@ -1,0 +1,17 @@
+.billing-this-month-card > h3 {
+    border-bottom: 1px solid rgba(192, 192, 192, 1);
+}
+
+/* eksempel-layout for tre-kolonne på større skjermer */
+.billing-this-month-card {
+    border-radius: 2px solid black;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    border: 1px solid black;
+}
+
+.billing-this-month-content {
+    display: grid;
+    gap: 20px;   
+}
+

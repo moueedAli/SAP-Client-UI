@@ -1,9 +1,11 @@
 import './home.css'
 import { Header, Footer } from '../Profile';
 import AddIcon from '../../icons/add-icon';
-import { useEffect, useState } from 'react';
+import { act, useEffect, useState } from 'react';
 import { API_URL } from '../../service/constant';
 import Timesheet from '../Timesheet';
+import BillingInfoCard from '../BillingInfo';
+import AddHours from '../AddHours';
 
 const Home = () => {
     const [selectedActivity, setSelectedActivity] = useState("");
@@ -141,78 +143,20 @@ const Home = () => {
                     </div>
 
                     <div className='billing-cards-first-half'>
-                        <div className='billing-this-month-card card-section'>
-                            <h3>Billed this month</h3>
-                            <div className='billing-this-month-content'>
-                                <label htmlFor='total-hours-month'>Total hours this month</label>
-                                <input
-                                    className='accumulated-hours'
-                                    type='number'
-                                    value={totalHoursWorked}  
-                                    readOnly
-                                />
-
-                                <label htmlFor="total-comp-month">Total compensation for this month</label>
-                                <input  
-                                    className='accumulated-pay'
-                                    type='number'
-                                    value={Math.round((salary/1800)*totalHoursWorked)}
-                                    readOnly
-                                />
-                            </div>
-                        </div>
+                        <BillingInfoCard totalHoursWorked={totalHoursWorked} salary={salary}/>
 
                         <div className='add-new-hours-card card-section'>
-                            <h3>Add new hours</h3>
-                            <div className='add-hours-inputfields'>
-                                <div className='select-activity-field'>
-                                    <label>Select an activity*</label>
-                                    <select
-                                        id="activity-select"
-                                        className="dropdown-activity"
-                                        value={selectedActivity}
-                                        onChange={(event) => setSelectedActivity(event.target.value)}
-                                    >
-                                        {activities.map((a,key)=>
-                                            <option key={key} value={a.name}> {a.name} </option>)}
-                                    </select>
-                                </div>
-
-                                <div className='select-date-field'>
-                                    <label>Select a date*</label>
-                                    <input
-                                        id="date-native"
-                                        type="date"
-                                        value={date}
-                                        onChange={(event) => setDate(event.target.value)}
-                                        className="date-input"
-                                    />
-                                </div>
-
-                                <div className='add-start-time'>
-                                    <label>Select time when started*</label>
-                                    <input
-                                        id='time-native'
-                                        type='time'
-                                        value={startTime}
-                                        onChange={(event) => setStartTime(event.target.value)}
-                                        step="1"
-                                        className='time-input'
-                                    />
-                                </div>
-
-                                <div className='add-end-time'>
-                                    <label>Select time when ended*</label>
-                                    <input
-                                        id='time-native'
-                                        type='time'
-                                        value={endTime}
-                                        onChange={(event) => setEndTime(event.target.value)}
-                                        step="1"
-                                        className='time-input'
-                                    />
-                                </div>
-                            </div>
+                            <AddHours 
+                                selectedActivity={selectedActivity}
+                                setSelectedActivity={setSelectedActivity}
+                                activities={activities}
+                                date={date}
+                                setDate={setDate}
+                                startTime={startTime}
+                                setStartTime={setStartTime}
+                                endTime={endTime}
+                                setEndTime={setEndTime}
+                            />
                         </div>
                     </div>
 
