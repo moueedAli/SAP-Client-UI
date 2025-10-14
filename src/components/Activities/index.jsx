@@ -2,7 +2,7 @@ import { useState } from "react";
 import { API_URL } from "../../service/constant";
 import Timesheet from "../Timesheet";
 import Header from "../Header";
-
+import Footer from "../Footer";
 
 const Activities = ({ user }) => {
     const [activities, setActivities] = useState([]);
