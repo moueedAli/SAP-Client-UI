@@ -34,7 +34,6 @@ const Login = ({setUser }) => {
             }
             
             const data = await res.json().catch(() => ({}));
-            console.log(data)
             setUser(data)
             localStorage.setItem("user", JSON.stringify(data))
             navigate('/profile')

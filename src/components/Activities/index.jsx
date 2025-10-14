@@ -55,8 +55,6 @@ const Activities = ({ user }) => {
         fetchTimeEntries();
     }, [userId])
 
-    console.log(entries)
-
     return (
         <>
         <Header />
