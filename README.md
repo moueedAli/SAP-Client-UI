@@ -1,16 +1,20 @@
-# React + Vite
+# 🕒 SAP Timeføring
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SAP Timeføring er en moderne og brukervennlig webapplikasjon for registrering av arbeidstid, utviklet med fokus på enkelhet, hastighet og robusthet. Inspirert av SAPs timeføringssystem, men designet for å være langt intuitiv og tilpasset team som ønsker effektiv tidshåndtering uten kompleksiteten.
 
-Currently, two official plugins are available:
+## 🚀 Funksjoner
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Rask registrering av timer**: Legg inn arbeidstid med få klikk — ingen unødvendige felter.
+- **Prosjektbasert føring**: Velg prosjekt, aktivitet og legg til kommentarer.
+- **Validering i sanntid**: Unngå feilføringer med innebygd logikk for dato, tid og overlapp.
 
-## React Compiler
+## 🛠 Teknologi
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React med moderne komponentstruktur og tilpasset UX.
+- **Backend**: Go (Golang) med RESTful API-er og robust datavalidering.
+- **Database**: PostgreSQL med tydelig modellering av brukere, prosjekter og timeføringer.
 
-## Expanding the ESLint configuration
+## 📦 Kom i gang
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Klon repoet:
+   git clone https://github.com/ditt-repo/konsulenten-timeforing.git
