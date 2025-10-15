@@ -2,6 +2,8 @@ import './billingInfo.css'
 
 const BillingInfoCard = ({ totalHoursWorked, salary }) => {
 
+    /* fastsatt at man jobber 1750 timer i året */
+
     return(
         <>
             <div className='billing-this-month-card card-section'>

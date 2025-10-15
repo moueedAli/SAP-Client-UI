@@ -12,8 +12,7 @@ const RegisterForm = ({ setUser }) => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate()
 
-    const url = `${API_URL}/register`;
-
+    /*registrerer en ny bruker */
     const handleSignup = async (e) => {
         e.preventDefault();
 
@@ -26,7 +25,7 @@ const RegisterForm = ({ setUser }) => {
         }
 
         try {
-            const res = await fetch(url, {
+            const res = await fetch(`${API_URL}/register`, {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
@@ -42,7 +41,6 @@ const RegisterForm = ({ setUser }) => {
             const data = await res.json().catch(() => ({}));   
             setUser(data)
             navigate('/profile')
-
         } catch (err) {
             console.log(err)
         }   
@@ -94,6 +92,7 @@ const RegisterForm = ({ setUser }) => {
                             required 
                         />
                     </div>
+                
                     <button 
                         type="submit" 
                         onClick={() => navigate(`/profile`)}>

@@ -9,8 +9,7 @@ const Login = ({setUser }) => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const url = `${API_URL}/login`;
-
+    /*logger inn en bruker */
     const handleLogin = async (e) => {
         e.preventDefault()
 
@@ -20,7 +19,7 @@ const Login = ({setUser }) => {
         }
 
         try {
-            const res = await fetch(url, {
+            const res = await fetch(`${API_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,7 +36,6 @@ const Login = ({setUser }) => {
             setUser(data)
             localStorage.setItem("user", JSON.stringify(data))
             navigate('/profile')
-
         } catch (err) {
             console.log(err)
         }           
@@ -48,8 +46,22 @@ const Login = ({setUser }) => {
             <div className='login-card'>
                 <h2>Login to your profile</h2>
                 <form className='login-form' onSubmit={handleLogin} >
-                    <input type="email" placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
-                    <input type="password" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)} required />
+                    <input 
+                        type="email" 
+                        placeholder="Enter email" 
+                        value={email} 
+                        onChange={(e)=>setEmail(e.target.value)} 
+                        required
+                    />
+
+                    <input 
+                        type="password" 
+                        placeholder="Enter password" 
+                        value={password} 
+                        onChange={(e)=>setPassword(e.target.value)} 
+                        required 
+                    />
+                    
                     <button type="submit">Submit</button>
                 </form>
             </div>

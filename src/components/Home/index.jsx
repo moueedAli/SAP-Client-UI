@@ -21,7 +21,7 @@ const Home = ({ user }) => {
 
     const [dummyNumber, setDummyNumber] = useState(0)
     
-    /*henter brukerdata fra localstorage */
+    /*henter brukerdata fra user prop */
     useEffect(() => {
         if (user) {
             try {
@@ -73,14 +73,13 @@ const Home = ({ user }) => {
         fetchActivities();
     }, []);
 
-    /*henter alle dager for en gitt brukerid */
+    /*henter alle dager registrert for en gitt brukerid */
     useEffect(() => {
         const fetchTimeEntries = async () => {
             if (userId) {
                 try {
                     const response = await fetch(`${API_URL}/days/all/${userId}`);
                     const data = await response.json();
-                    console.log(data)
                     setDays(data);
                 } catch (err) {
                     console.error("Failed to fetch time entries:", err);
@@ -92,6 +91,7 @@ const Home = ({ user }) => {
         fetchTimeEntries();
     }, [userId,dummyNumber]);
 
+    /*legger til en ny time entry */
     const addNewTimeEntry = async (e) => {
         e.preventDefault()
         const acitivity = activities.find(e=>e.name === selectedActivity)
@@ -125,13 +125,25 @@ const Home = ({ user }) => {
         }   
     }
 
-    const totalHoursWorked = (days ?? []).reduce((sum, entry) => sum + entry.total_hours, 0);
+    /*regner ut totale timer en bruker har jobbet for gjeldende måned*/
+    const totalHoursThisMonth = (days, now = new Date()) => {
+        const year = now.getFullYear();
+        const month = now.getMonth();
+        return (days ?? []).reduce((sum, entry) => {
+          const d = entry.date instanceof Date ? entry.date : new Date(entry.date);
+          if (isNaN(d)) return sum;
+          return d.getFullYear() === year && d.getMonth() === month
+            ? sum + (Number(entry.total_hours) || 0)
+            : sum;
+        }, 0);
+      };      
 
     return (
         <>
             <Header />
             <main className="billing-page">
-                <section className="billing-card">
+                <section className="billing-card">¨
+                    
                     <div className='billing-page-header'>
                         <h1>Your billing information</h1>
                         <div className='btn-group'>
@@ -140,7 +152,7 @@ const Home = ({ user }) => {
                     </div>
 
                     <div className='billing-cards-first-half'>
-                        <BillingInfoCard totalHoursWorked={totalHoursWorked} salary={salary}/>
+                        <BillingInfoCard totalHoursWorked={totalHoursThisMonth(days)} salary={salary}/>
 
                         <div className='add-new-hours-card card-section'>
                             <AddHours 
@@ -167,6 +179,7 @@ const Home = ({ user }) => {
                             </div>                            
                         </div>
                     </div>
+
                 </section>
             </main>
             <Footer />

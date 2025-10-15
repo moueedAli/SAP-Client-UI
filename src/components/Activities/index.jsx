@@ -55,7 +55,7 @@ const Activities = ({ user }) => {
             }
         };
         fetchTimeEntries();
-    }, [userId])
+    }, [userId, id])
 
     return (
         <>
