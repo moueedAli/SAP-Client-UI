@@ -142,7 +142,7 @@ const Home = ({ user }) => {
         <>
             <Header />
             <main className="billing-page">
-                <section className="billing-card">¨
+                <section className="billing-card">
                     
                     <div className='billing-page-header'>
                         <h1>Your billing information</h1>
