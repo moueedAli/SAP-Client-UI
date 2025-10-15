@@ -62,7 +62,7 @@ const Login = ({setUser }) => {
                         required 
                     />
                     
-                    <button type="submit">Submit</button>
+                    <button type="submit">Login</button>
                 </form>
             </div>
         </div>

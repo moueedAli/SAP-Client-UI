@@ -40,11 +40,22 @@ const RegisterForm = ({ setUser }) => {
 
             const data = await res.json().catch(() => ({}));   
             setUser(data)
+            console.log(data)
             navigate('/profile')
         } catch (err) {
             console.log(err)
         }   
     }
+
+    const validateEmail = (email) => {
+        const mailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        if (email.match(mailFormat)) {
+            return true; 
+        } else {
+            alert("You have entered an invalid email address");
+            return false;
+        }
+    }  
 
     return (
         <div className="register-hero">
@@ -76,10 +87,14 @@ const RegisterForm = ({ setUser }) => {
                     />
 
                     <input 
-                        type="tel" 
+                        type="number" 
                         placeholder="Mobile number" 
                         value={mobile} 
                         onChange={(e)=>setMobile(e.target.value)} 
+                        onInput={(e) => {
+                            if (e.target.value.length > 11) {
+                                e.target.value = e.target.value.slice(0, 11);
+                              }}}
                         required 
                     />
 
@@ -95,13 +110,28 @@ const RegisterForm = ({ setUser }) => {
                 
                     <button 
                         type="submit" 
-                        onClick={() => navigate(`/profile`)}>
-                        Submit
+                        onClick={async () => {
+                            if (validateEmail(email)) {
+                                try {
+                                    await handleSignup();
+                                } 
+                                catch (err) {
+                                    if (err.status === 400) {
+                                    alert("Email is already in use");
+                                    }
+                                }
+                            }
+                        }}
+                    >
+                        Register
                     </button>
 
-                    <button 
-                        type="submit" 
-                        onClick={() => navigate(`/login`)}>
+
+<p>already have an account, please login </p>
+                    <button
+                        type="submit"
+                        onClick={() => {navigate('/login')}}    
+                    >
                         Login
                     </button>
                 </form>
