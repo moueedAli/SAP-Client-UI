@@ -38,18 +38,6 @@ const Profile = ({ user }) => {
                                 <input id="mobile" type="tel" value={user.mobile} readOnly />
                             </div>
                         </div>
-
-                        <div className="profile-billing-info">
-                            <div className="form-group hours-this-month">
-                                <label htmlFor="hours_month">Total hours billed this month</label>
-                                <input id="hours_month" type="number" value={0} readOnly />
-                            </div>
-
-                            <div className="form-group compensation">
-                                <label htmlFor="compensation">Total compensation</label>
-                                <input id="compensation" type="number" value={0} readOnly />
-                            </div>
-                        </div>
                     </section>
                 </main>
             </div>

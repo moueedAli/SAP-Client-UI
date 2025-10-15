@@ -1,8 +1,7 @@
 import './timesheetDays.css'
 import { Link } from 'react-router-dom'
 
-const TimesheetDays = ({ days }) => {
-
+const TimesheetDays = ({ days }) => {    
     return (
         <div className="timesheet" role="table" aria-label="Timesheet">
             <div className="header">
@@ -20,7 +19,7 @@ const TimesheetDays = ({ days }) => {
                         <p className="col activity" role="cell">{`${e.time_entries.length} activities saved this day`}</p>
                         <p className="col date" role="cell">{e.date}</p>
                         <p className="col total" role="cell">{e.total_hours}</p>
-                        <Link to={"/activities/:id"}>View activities</Link>
+                        <Link to={`/activities/day/${e.id}`}>View activities</Link>
                     </div>
                 ))}
             </div>

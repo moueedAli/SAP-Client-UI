@@ -23,12 +23,12 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-          <Route path="/" element={<Navigate to="/register" replace />} />
+          <Route path="/" element={<Navigate to="/profile" replace />} />
           <Route path='/register' element={<RegisterForm setUser={setUser}/>}/>
           <Route path='/login' element={<Login setUser={setUser}/>} />
           <Route path='/profile' element={<Profile user={user}/>} />
           <Route path='/home' element={<Home user={user}/>}/>
-          <Route path='/activities' element={<Activities user={user} />} />
+          <Route path='/activities/day/:id' element={<Activities user={user} />} />
 
         </Routes>
       </BrowserRouter>

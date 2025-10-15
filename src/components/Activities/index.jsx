@@ -4,11 +4,13 @@ import './activities.css'
 import Timesheet from "../Timesheet";
 import Header from "../Header";
 import Footer from "../Footer";
+import {useParams} from 'react-router-dom';
 
 const Activities = ({ user }) => {
     const [activities, setActivities] = useState([]);
     const [entries, setEntries] = useState([]);
     const [userId, setUserId] = useState(null);
+    const { id } = useParams();
 
     /*henter brukerdata fra localstorage */
     useEffect(() => {
@@ -42,7 +44,7 @@ const Activities = ({ user }) => {
         const fetchTimeEntries = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`${API_URL}/days/${userId}`);
+                    const response = await fetch(`${API_URL}/activities/day/${id}`);
                     const data = await response.json();
                     setEntries(data);
                 } catch (err) {

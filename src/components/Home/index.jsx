@@ -78,8 +78,9 @@ const Home = ({ user }) => {
         const fetchTimeEntries = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`${API_URL}/days/${userId}`);
+                    const response = await fetch(`${API_URL}/days/all/${userId}`);
                     const data = await response.json();
+                    console.log(data)
                     setDays(data);
                 } catch (err) {
                     console.error("Failed to fetch time entries:", err);
@@ -124,6 +125,8 @@ const Home = ({ user }) => {
         }   
     }
 
+    const totalHoursWorked = (days ?? []).reduce((sum, entry) => sum + entry.total_hours, 0);
+
     return (
         <>
             <Header />
@@ -137,7 +140,7 @@ const Home = ({ user }) => {
                     </div>
 
                     <div className='billing-cards-first-half'>
-                        <BillingInfoCard totalHoursWorked={2} salary={salary}/>
+                        <BillingInfoCard totalHoursWorked={totalHoursWorked} salary={salary}/>
 
                         <div className='add-new-hours-card card-section'>
                             <AddHours 
@@ -172,9 +175,3 @@ const Home = ({ user }) => {
 }
 
 export default Home
-
-/*    const totalHoursWorked = (days ?? []).reduce((sum, entry) => sum + entry.total_hours, 0);
-*/
-
-/*
- */
