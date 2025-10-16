@@ -114,8 +114,10 @@ const Home = ({ user }) => {
                 body: JSON.stringify(payload),
             });
 
+            /*sende bruker feilmld om forsøk på å legge til for mange timer */
             if (!res.ok) {
                 const body = await res.json().catch(() => ({}))
+                alert('You have registered 24 hours for this day, any more is not possible.');
                 throw new Error(body.error || `Request failed: ${res.status}`)
             }
 

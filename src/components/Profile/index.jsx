@@ -15,7 +15,6 @@ const Profile = ({ user }) => {
 
                 <main className="profile-card">
                     <section className="profile-info-card">
-                        
                         <h3>Welcome, {user.first_name} {user.last_name}</h3>
 
                         <div className="profile-personal-info">
