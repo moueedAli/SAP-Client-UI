@@ -1,4 +1,5 @@
 import './footer.css'
+import FacebookIcon from '../../icons/facebook-icon';
 
 const Footer = () => {
     return (
@@ -7,8 +8,8 @@ const Footer = () => {
                 <div className="container footer-inner">
                     <div className="footer-left">
                         <button className="icon-btn" aria-label="Settings">⚙️</button>
-                        <a className="icon-link" href="https://facebook.com" aria-label="Facebook">f</a>
-                        <a className="icon-link" href="https://instagram.com" aria-label="Instagram">ig</a>
+                        <a className="icon-link" href="https://facebook.com" aria-label="Facebook">Facebook</a>
+                        <a className="icon-link" href="https://instagram.com" aria-label="Instagram">Instagram</a>
                     </div>
 
                     <div className="footer-right">

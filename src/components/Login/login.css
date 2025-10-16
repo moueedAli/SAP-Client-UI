@@ -125,6 +125,7 @@
   background: var(--btn-hover);
   transform: translateY(-1px);
 }
+
 .login-form button[type="submit"]:active,
 .login-card .submit-btn:active {
   transform: translateY(0);

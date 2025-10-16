@@ -69,6 +69,7 @@
   color: #fff;
   border: none;
 }
+
 .btn-primary:hover { filter: brightness(1.03); }
 
 /* seksjoner inne i kortet */
@@ -81,9 +82,9 @@
 }
 
 .billing-cards-first-half {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 /* add-new-hours og history layout */
@@ -94,8 +95,8 @@
 }
 
 .add-new-hours-card {
-    width: 700px;
-    border: 1px solid black;
+  width: 700px;
+  border: 1px solid black;
 }
 
 .add-new-hours-card > h3 {
@@ -165,27 +166,27 @@
 }
 
 .dropdown-activity {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    color: #0f172a;
-    background-color: #ffffff;
-    font-size: 0.95rem;
-    padding-left: 100p;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  color: #0f172a;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  padding-left: 100p;
 }
 
 .date-input {
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    font-size: 0.95rem;
-    color: #0f172a;
-    box-sizing: border-box;
-    font-family: 'Times New Roman', Times, serif;
-  }
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  color: #0f172a;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
   
 .select-activity-field {
   display: grid;
@@ -219,16 +220,19 @@
   align-items: center;
   padding: 8px 0;
 }
+
 .header {
   background: #f5f7fa;
   border-bottom: 2px solid #e1e5ea;
   font-weight: 700;
   color: #111827;
 }
+
 .row {
   border-bottom: 1px solid #eceef3;
   color: #111827;
 }
+
 .col { margin: 0; padding: 4px 8px; }
 
 /* Små skjermer: gjør hver rad til enkel kolonne */
@@ -243,4 +247,3 @@
   .col.end::before { content: "End time: "; font-weight: 700; }
   .col.total::before { content: "Total hours: "; font-weight: 700; }
 }
-

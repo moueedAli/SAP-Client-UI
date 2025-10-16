@@ -114,6 +114,7 @@
   background: #bfc5cc;
   transform: translateY(-1px);
 }
+
 .register-form button[type="submit"]:active {
   transform: translateY(0);
 }
