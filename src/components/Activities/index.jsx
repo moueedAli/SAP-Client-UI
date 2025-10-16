@@ -44,7 +44,7 @@ const Activities = ({ user }) => {
         const fetchTimeEntries = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`${API_URL}/activities/day/${id}`);
+                    const response = await fetch(`${API_URL}/timeEntry/day/${id}`);
                     const data = await response.json();
                     setEntries(data);
                 } catch (err) {
