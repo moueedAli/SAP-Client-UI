@@ -13,7 +13,7 @@ const Home = ({ user }) => {
     const [date, setDate] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
-    const [billingCode, setBillingCode] = useState(null);
+    const [billingCode, setBillingCode] = useState(0);
     const [salary, setSalary] = useState(0);
     const [days, setDays] = useState([]);
 
@@ -55,6 +55,7 @@ const Home = ({ user }) => {
 
         fetchBillingObject();
     }, [billingCode]);
+
 
     /*henter alle aktiviteter og lagrer i activites (dropdown meny) */
     useEffect(() => {

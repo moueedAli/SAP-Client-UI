@@ -11,7 +11,7 @@ const Header = () => {
                     <div className="brand">SAP 2.0</div>
 
                     <nav className="main-nav" aria-label="Main navigation">
-                        <a href="/home" className="nav-link">Home</a>
+                        <a href="/register-hours" className="nav-link">Register hours</a>
                         <a href="/profile" className="nav-link ">Profile</a>
                     </nav>
 

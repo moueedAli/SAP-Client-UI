@@ -18,6 +18,7 @@ function App() {
     else localStorage.removeItem("user")
   }, [user]);
 
+
   return (
     <>
       <BrowserRouter>
@@ -27,7 +28,7 @@ function App() {
           <Route path='/register' element={<RegisterForm setUser={setUser}/>}/>
           <Route path='/login' element={<Login setUser={setUser}/>} />
           <Route path='/profile' element={<Profile user={user}/>} />
-          <Route path='/home' element={<Home user={user}/>}/>
+          <Route path='/register-hours' element={<Home user={user}/>}/>
           <Route path='/activities/day/:id' element={<Activities user={user} />} />
 
         </Routes>

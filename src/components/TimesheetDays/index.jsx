@@ -15,7 +15,7 @@ const TimesheetDays = ({ days }) => {
             <div className="body" role="rowgroup">
                 {days?.map((e, i) => (
                     <div className="row" role="row" key={e.id ?? i}>
-                        <p>{`Billing number #${e.id}`}</p>
+                        <p className='col billing-number'>{`Billing number #${e.id}`}</p>
                         <p className="col activity" role="cell">{`${e.time_entries.length} activities saved this day`}</p>
                         <p className="col date" role="cell">{e.date}</p>
                         <p className="col total" role="cell">{e.total_hours}</p>

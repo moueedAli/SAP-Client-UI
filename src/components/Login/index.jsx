@@ -45,7 +45,7 @@ const Login = ({setUser }) => {
         <div className='login-page'>
             <div className='login-card'>
                 <h2>Login to your profile</h2>
-                <form className='login-form' onSubmit={handleLogin} >
+                <form className='login-form'>
                     <input 
                         type="email" 
                         placeholder="Enter email" 
@@ -62,7 +62,21 @@ const Login = ({setUser }) => {
                         required 
                     />
                     
-                    <button type="submit">Login</button>
+                    <button 
+                        type="submit"
+                        onClick={handleLogin}    
+                    >
+                        Login
+                    </button>
+                    
+                    <p className='small-text-paragraph'>Don't have an account? Click here to register </p>
+
+                    <button 
+                        type='submit' 
+                        onClick={() => navigate('/register')}
+                    > 
+                        Register
+                    </button>
                 </form>
             </div>
         </div>

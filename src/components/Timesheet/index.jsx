@@ -1,7 +1,6 @@
 import './timesheet.css'
 
 const Timesheet = ({ entries, activities }) => {
-
     return (
         <div className="timesheet" role="table" aria-label="Timesheet">
             <div className="header">
@@ -16,9 +15,9 @@ const Timesheet = ({ entries, activities }) => {
             <div className="body" role="rowgroup">
                 {entries?.time_entries?.map((e, i) => (
                     <div className="row" role="row" key={e.id ?? i}>
-                        <p className='col billing' role='cell'>{`Billing number #${e.id}`}</p>
+                        <p className='col billing' role='cell'>{`Activity number #${e.id}`}</p>
                         <p className="col activity" role="cell">{activities.find(a => a.id === e.activity_id)?.name ?? "Ukjent aktivitetet"}</p>
-                        <p className="col date" role="cell">{e.date}</p>
+                        <p className="col date" role="cell">{e.date.slice(0, 10)}</p>
                         <p className="col start" role="cell">{e.start_time}</p>
                         <p className="col end" role="cell">{e.end_time}</p>
                         <p className="col total" role="cell">{e.total_hours}</p>

@@ -126,8 +126,8 @@ const RegisterForm = ({ setUser }) => {
                         Register
                     </button>
 
-
-<p>already have an account, please login </p>
+                    <p className="small-text-paragraph">Already have an account? Click here to login </p>
+                    
                     <button
                         type="submit"
                         onClick={() => {navigate('/login')}}    
