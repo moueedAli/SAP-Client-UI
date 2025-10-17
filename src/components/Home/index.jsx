@@ -132,14 +132,39 @@ const Home = ({ user }) => {
     const totalHoursThisMonth = (days, now = new Date()) => {
         const year = now.getFullYear();
         const month = now.getMonth();
+
         return (days ?? []).reduce((sum, entry) => {
           const d = entry.date instanceof Date ? entry.date : new Date(entry.date);
           if (isNaN(d)) return sum;
+
           return d.getFullYear() === year && d.getMonth() === month
             ? sum + (Number(entry.total_hours) || 0)
             : sum;
         }, 0);
-      };      
+    };      
+
+    /*sletter en hel dag */
+    const handleDeleteDay = async (dayId) => {
+        try {
+            const res = await fetch(`${API_URL}/days/${dayId}`, { /*endre URLen her */
+                method: "DELETE",
+                headers: { 
+                    "Content-Type": "application/json"
+                },
+            }
+        );
+
+            if (res.ok) {
+                setDays(prev => prev.filter(d => d.id !== dayId));
+            } else {
+                alert("The deletion of this day failed")
+                throw new Error('Delete failed');
+            }
+
+        } catch (err) {
+            console.error('Delete error', err);
+        }
+    };
 
     return (
         <>
@@ -177,7 +202,7 @@ const Home = ({ user }) => {
                             <h3>History</h3>
                             <div className='history-card-content'>
                                 <div className='history-card-content-header'>  
-                                    <TimesheetDays days={days} />           
+                                    <TimesheetDays days={days} onDelete={handleDeleteDay}/>           
                                 </div>
                             </div>                            
                         </div>

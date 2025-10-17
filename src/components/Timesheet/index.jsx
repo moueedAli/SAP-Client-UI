@@ -1,6 +1,6 @@
 import './timesheet.css'
 
-const Timesheet = ({ entries, activities }) => {
+const Timesheet = ({ entries, activities, onDelete }) => {
     return (
         <div className="timesheet" role="table" aria-label="Timesheet">
             <div className="header">
@@ -10,6 +10,7 @@ const Timesheet = ({ entries, activities }) => {
                 <p className="col start">Start time</p>
                 <p className="col end">End time</p>
                 <p className="col total">Total hours</p>
+                <p className='col delete'>Delete</p>
             </div>
 
             <div className="body" role="rowgroup">
@@ -21,6 +22,12 @@ const Timesheet = ({ entries, activities }) => {
                         <p className="col start" role="cell">{e.start_time}</p>
                         <p className="col end" role="cell">{e.end_time}</p>
                         <p className="col total" role="cell">{e.total_hours}</p>
+                        <span
+                            className="link-like"
+                            onClick={() => onDelete(e.id)}
+                        >
+                            Delete
+                        </span>
                     </div>
                 ))}
             </div>

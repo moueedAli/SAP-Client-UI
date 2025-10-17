@@ -57,6 +57,32 @@ const Activities = ({ user }) => {
         fetchTimeEntries();
     }, [userId, id])
 
+    /*slette en aktivitet */
+    const handleDeleteTimeentry = async (timeEntryId) => {
+        try {
+            const res = await fetch(`${API_URL}/timeEntry/${timeEntryId}`, { /*endre URLen her */
+                method: "DELETE",
+                headers: { 
+                    "Content-Type": "application/json"
+                },
+            }
+        );
+
+            if (res.ok) {
+                setEntries(prev => ({
+                    ...prev,
+                    time_entries: prev.time_entries.filter(d => d.id !== timeEntryId)
+                  }));                  
+            } else {
+                alert("The deletion of this day failed")
+                throw new Error('Delete failed');
+            }
+
+        } catch (err) {
+            console.error('Delete error', err);
+        }
+    };
+
     return (
         <>
         <Header />
@@ -71,7 +97,7 @@ const Activities = ({ user }) => {
                         <h3>History</h3>
                         <div className='history-card-content'>
                             <div className='history-card-content-header'> 
-                                <Timesheet entries={entries} activities={activities} />
+                                <Timesheet entries={entries} activities={activities} onDelete={handleDeleteTimeentry} />
                             </div>       
                         </div>
                     </div>                            

@@ -1,6 +1,6 @@
 .header, .row {
   display: grid;
-  grid-template-columns: 160px 1fr 120px 120px 120px 90px;
+  grid-template-columns: 160px 1fr 120px 120px 120px 90px 120px;
   gap: 12px;
   align-items: center;
   padding: 8px 0;
@@ -39,4 +39,13 @@
   
 .billing-history > h3 {
   border-bottom: 1px solid rgba(192, 192, 192, 1);
+}
+
+.link-like {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-like:hover {
+  text-decoration: none;
 }
